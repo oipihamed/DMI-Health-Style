@@ -1,10 +1,11 @@
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/body_measurement.dart';
-import 'package:best_flutter_ui_templates/fitness_app/ui_view/glass_view.dart';
+//import 'package:best_flutter_ui_templates/fitness_app/ui_view/glass_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/mediterranean_diet_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/title_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:best_flutter_ui_templates/fitness_app/my_diary/meals_list_view.dart';
-import 'package:best_flutter_ui_templates/fitness_app/my_diary/water_view.dart';
+import 'package:best_flutter_ui_templates/fitness_app/my_diary/exercise_list_view.dart';
+//import 'package:best_flutter_ui_templates/fitness_app/my_diary/water_view.dart';
 import 'package:flutter/material.dart';
 
 class MyDiaryScreen extends StatefulWidget {
@@ -61,8 +62,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
 
     listViews.add(
       TitleView(
-        titleTxt: 'Mediterranean diet',
-        subTxt: 'Details',
+        titleTxt: 'Resumen Diario',
+        
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
@@ -81,8 +82,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     );
     listViews.add(
       TitleView(
-        titleTxt: 'Meals today',
-        subTxt: 'Customize',
+        titleTxt: 'Comidas de hoy',
+        //subTxt: 'Customize',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
@@ -90,7 +91,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         animationController: widget.animationController!,
       ),
     );
-
+    
     listViews.add(
       MealsListView(
         mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -101,11 +102,32 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         mainScreenAnimationController: widget.animationController,
       ),
     );
-
     listViews.add(
       TitleView(
-        titleTxt: 'Body measurement',
-        subTxt: 'Today',
+        titleTxt: 'Ejercicios Recomendados',
+        //subTxt: 'Customize',
+        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: widget.animationController!,
+            curve:
+                Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
+        animationController: widget.animationController!,
+      ),
+    );
+    
+    listViews.add(
+      ExeciseListView(
+        mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+                parent: widget.animationController!,
+                curve: Interval((1 / count) * 3, 1.0,
+                    curve: Curves.fastOutSlowIn))),
+        mainScreenAnimationController: widget.animationController,
+      ),
+    );
+    
+    listViews.add(
+      TitleView(
+        titleTxt: 'Medidas Importantes',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
@@ -123,7 +145,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         animationController: widget.animationController!,
       ),
     );
-    listViews.add(
+    /*listViews.add(
       TitleView(
         titleTxt: 'Water',
         subTxt: 'Aqua SmartBottle',
@@ -133,9 +155,9 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                 Interval((1 / count) * 6, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
       ),
-    );
+    );*/
 
-    listViews.add(
+    /*listViews.add(
       WaterView(
         mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
@@ -153,7 +175,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                   curve: Interval((1 / count) * 8, 1.0,
                       curve: Curves.fastOutSlowIn))),
           animationController: widget.animationController!),
-    );
+    );*/
   }
 
   Future<bool> getData() async {
@@ -250,7 +272,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'My Diary',
+                                  'Mi Día',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
@@ -294,7 +316,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                                     ),
                                   ),
                                   Text(
-                                    '15 May',
+                                    '20 Oct',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
