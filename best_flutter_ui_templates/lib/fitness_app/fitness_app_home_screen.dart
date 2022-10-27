@@ -2,6 +2,7 @@ import 'package:best_flutter_ui_templates/fitness_app/calculator/ui_calaculator.
 import 'package:best_flutter_ui_templates/fitness_app/models/tabIcon_data.dart';
 import 'package:best_flutter_ui_templates/fitness_app/questionnaire/questionnaire_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training/training_screen.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'fitness_app_theme.dart';
@@ -17,8 +18,9 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
   AnimationController? animationController;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
-  //DatabaseReference referenceT =
-  //    FirebaseDatabase.instance.reference().child("Users/");
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference ref = FirebaseDatabase.instance.ref("Users/");
+
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
@@ -30,16 +32,13 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
-    //referenceT.onValue.listen((event) {
-    //  final data = event.snapshot.value;
-    //  print("Datos de bd" + data.toString());
-    //});
 
     //Muestra cuestionario Inicial
     tabIconsList[0].isSelected = true;
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
     tabBody = MyDiaryScreen(animationController: animationController);
+    //enviarDato().then((value) => print("Enviado"));
     super.initState();
   }
 
@@ -128,6 +127,14 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
         ),
       ],
     );
+  }
+
+  Future<void> enviarDato() async {
+    await ref.set({
+      "name": "John",
+      "age": 18,
+      "address": {"line1": "100 Mountain View"}
+    });
   }
 
   //Funcion muestra cuestionario inicial
