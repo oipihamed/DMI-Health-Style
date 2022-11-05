@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'fitness_app_theme.dart';
 import 'my_diary/my_diary_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FitnessAppHomeScreen extends StatefulWidget {
   @override
@@ -19,8 +20,9 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
   FirebaseDatabase database = FirebaseDatabase.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
   DatabaseReference ref = FirebaseDatabase.instance.ref("Users/");
-
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
@@ -38,6 +40,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
     tabBody = MyDiaryScreen(animationController: animationController);
+    addUser().then((value) => print("Enviado"));
     //enviarDato().then((value) => print("Enviado"));
     super.initState();
   }
@@ -127,6 +130,18 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
         ),
       ],
     );
+  }
+
+  Future<void> addUser() {
+    // Call the user's CollectionReference to add a new user
+    return users
+        .add({
+          'full_name': 'Omar', // John Doe
+          'company': 'NUEVA', // Stokes and Sons
+          'age': '27' // 42
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
 
   Future<void> enviarDato() async {

@@ -4,10 +4,14 @@ import 'package:best_flutter_ui_templates/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'firebase_options.dart';
+import 'fitness_app/Login/login_page_2.dart';
 import 'fitness_app/fitness_app_home_screen.dart';
+import 'fitness_app/routes/routes.dart';
 import 'navigation_home_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +24,12 @@ void main() async {
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
-  ]).then((_) => runApp(MyApp()));
+  ]).then((_) => runApp(GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/homepage',
+        navigatorKey: Get.key,
+        getPages: routes(),
+      )));
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +52,10 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      home: FitnessAppHomeScreen(),
+      initialRoute: LoginPage.id,
+      routes: {
+        LoginPage.id: (_) => LoginPage(), //Página de inicio de sesión
+      },
     );
   }
 }
