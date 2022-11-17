@@ -73,7 +73,7 @@ class MyContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 600,
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 0),
       decoration: BoxDecoration(
         color: const Color.fromARGB(31, 228, 226, 226).withOpacity(0.5),
         borderRadius: const BorderRadius.only(
@@ -93,9 +93,9 @@ class MyAppContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 0),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(224, 201, 37, 216).withOpacity(0.5),
+        color: Color.fromARGB(223, 85, 66, 228).withOpacity(0.5),
         borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(70)),
         )
       );
@@ -107,40 +107,40 @@ class MyTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
-        child: Table(border: TableBorder.all(),
-        children: const [
-          TableRow(
-            children: [
-                Text('Menor a 18.5'),
-                Text('Peso bajo'),
-            ]),
-          TableRow(
-            children: [
-                Text('18.6 a 24.9'),
-                Text('Peso normal'),
-            ]),
-         TableRow(
-            children: [
-                Text('25 a 29.9'),
-                Text('Sobrepeso'),
-            ]),
-          TableRow(
-            children: [
-                Text('30 a 34.9'),
-                Text('Obesidad leve'),
-            ]),
-          TableRow(
-            children: [
-                Text('35 a 39.9'),
-                Text('Obesidad media'),
-            ]),
-          TableRow(
-            children: [
-                Text('Mayor a 40'),
-                Text('Obesidad morbida'),
-            ]),
-        ],
-        )
-    );
-  }
+      child: Table(border: TableBorder.all(),
+      children: const [
+        TableRow(
+          children: [
+            Text('Menor a 18.5'),
+            Text('Peso bajo'),
+          ]),
+        TableRow(
+          children: [
+            Text('18.6 a 24.9'),
+             Text('Peso normal'),
+          ]),
+        TableRow(
+          children: [
+           Text('25 a 29.9'),
+           Text('Sobrepeso'),
+          ]),
+        TableRow(
+          children: [
+            Text('30 a 34.9'),
+            Text('Obesidad leve'),
+           ]),
+        TableRow(
+         children: [
+           Text('35 a 39.9'),
+           Text('Obesidad media'),
+          ]),
+        TableRow(
+          children: [
+          Text('Mayor a 40'),
+          Text('Obesidad morbida'),
+        ]),
+      ],
+    )
+  );
+}
 }
