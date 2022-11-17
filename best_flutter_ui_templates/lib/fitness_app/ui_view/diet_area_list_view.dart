@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../fitness_app_theme.dart';
@@ -15,18 +17,21 @@ class AreaListView extends StatefulWidget {
 
 class _AreaListViewState extends State<AreaListView>
     with TickerProviderStateMixin {
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  CollectionReference diets = FirebaseFirestore.instance.collection('dietas');
+  DatabaseReference ref = FirebaseDatabase.instance.ref("dietas/");
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   AnimationController? animationController;
   List<String> areaListData = <String>[
-    'assets/fitness_app/Huevo.png',
-    'assets/fitness_app/Ensalada.png',
-    'assets/fitness_app/FiletePescado.png',
-    'assets/fitness_app/Te.png',
+    //'assets/fitness_app/area1.png',
   ];
 
   @override
   void initState() {
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
+    obtenerDietas();
     super.initState();
   }
 
@@ -88,6 +93,23 @@ class _AreaListViewState extends State<AreaListView>
         );
       },
     );
+  }
+
+  Future<void> obtenerDietas() async {
+    await firestore.collection("dietas").snapshots().listen((event) {
+      for (var doc in event.docs) {
+        var dietas = doc.get("alimentos");
+        if (doc.get("estado").toString().contains("A")) {
+          setState(() {
+            areaListData = [];
+            areaListData.add("${dietas["rutaImagen"]}");
+            areaListData.add('assets/fitness_app/Ensalada.png');
+            //   areaListData.add('assets/fitness_app/Te.png');
+            //  areaListData.add('assets/fitness_app/FiletePescado.jpg');
+          });
+        }
+      }
+    });
   }
 }
 

@@ -56,7 +56,7 @@ class LoginController extends GetxController {
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
+      print(googleUser.authentication);
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -66,7 +66,7 @@ class LoginController extends GetxController {
       //await FirebaseAuth.instance.signInWithCredential(credential);
 
       final user = userCredential.user;
-      if (user != null && user.uid != null) {
+      if (user != null) {
         Get.snackbar('Hola', 'Sign In ${user.uid} with Google');
         print('Ingresó correctamente');
       }

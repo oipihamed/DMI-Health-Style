@@ -1,6 +1,7 @@
 import 'package:best_flutter_ui_templates/fitness_app/calculator/ui_calaculator.dart';
 import 'package:best_flutter_ui_templates/fitness_app/models/tabIcon_data.dart';
 import 'package:best_flutter_ui_templates/fitness_app/questionnaire/questionnaire_view.dart';
+import 'package:best_flutter_ui_templates/fitness_app/training/diet_screen.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training/training_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:best_flutter_ui_templates/fitness_app/admin/admin_view.dart';
@@ -124,6 +125,17 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                 setState(() {
                   tabBody =
                       TrainingScreen(animationController: animationController);
+                });
+              });
+            } else if (index == 2) {
+              animationController?.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody =
+                      DietScreen(animationController: animationController);
+                  ;
                 });
               });
             } else if (index == 3) {
