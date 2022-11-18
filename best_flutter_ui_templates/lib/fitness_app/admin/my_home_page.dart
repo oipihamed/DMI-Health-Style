@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:best_flutter_ui_templates/fitness_app/admin/message_response.dart';
 import 'package:flutter/material.dart';
 import 'package:best_flutter_ui_templates/fitness_app/admin/register_user.dart';
