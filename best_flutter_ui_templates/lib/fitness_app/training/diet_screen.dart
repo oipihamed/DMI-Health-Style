@@ -1,3 +1,4 @@
+import 'package:best_flutter_ui_templates/dietas/ui_dietas.dart';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/diet_area_list_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/diet_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/dietstate_view.dart';
@@ -134,7 +135,31 @@ class _DietScreenState extends State<DietScreen> with TickerProviderStateMixin {
         animationController: widget.animationController!,
       ),
     );
-
+    listViews.add(
+      InkWell(
+        highlightColor: Colors.transparent,
+        borderRadius: const BorderRadius.all(Radius.circular(32.0)),
+        onTap: () {
+          widget.animationController?.reverse().then<dynamic>((data) {
+            if (!mounted) {
+              return;
+            }
+            setState(() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DietasUI()),
+              );
+            });
+          });
+        },
+        child: Center(
+          child: Icon(
+            Icons.remove_red_eye,
+            color: FitnessAppTheme.grey,
+          ),
+        ),
+      ),
+    );
     listViews.add(
       AreaListView(
         mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(

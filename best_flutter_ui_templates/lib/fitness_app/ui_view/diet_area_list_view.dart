@@ -103,9 +103,6 @@ class _AreaListViewState extends State<AreaListView>
           setState(() {
             areaListData = [];
             areaListData.add("${dietas["rutaImagen"]}");
-            areaListData.add('assets/fitness_app/Ensalada.png');
-            //   areaListData.add('assets/fitness_app/Te.png');
-            //  areaListData.add('assets/fitness_app/FiletePescado.jpg');
           });
         }
       }
